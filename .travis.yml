@@ -3,20 +3,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t pckhai/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t daeril/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run pckhai/react-test npm test -- --coverage
+  - docker run daeril/react-test npm test -- --coverage
 
 after_success:
-  - docker build -t pckhai/multi-client ./client
-  - docker build -t pckhai/multi-nginx ./nginx
-  - docker build -t pckhai/multi-server ./server
-  - docker build -t pckhai/multi-worker ./worker
+  - docker build -t daeril/multi-client ./client
+  - docker build -t daeril/multi-nginx ./nginx
+  - docker build -t daeril/multi-server ./server
+  - docker build -t daeril/multi-worker ./worker
   # login to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # push images to docker hub
-  - docker push pckhai/multi-client
-  - docker push pckhai/multi-nginx
-  - docker push pckhai/multi-server
-  - docker push pckhai/multi-worker
+  - docker push daeril/multi-client
+  - docker push daeril/multi-nginx
+  - docker push daeril/multi-server
+  - docker push daeril/multi-worker
